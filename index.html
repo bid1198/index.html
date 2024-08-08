@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klik!</title>
+    
+    <!-- “Software ini bebas dipakai untuk disebarkan, dengan atau tanpa modifikasi, pada medium apapun tanpa perlu permisi sepanjang catatan ini turut disertakan.”
+oleh: Bangkit I.D. 20240808 -->
+	
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-color: #FFC0CB; 
+            overflow: hidden; 
+        }
+        #word {
+            font-size: 2em;
+            cursor: pointer;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div id="word">Klik!</div>
+    <script>
+        const words = ["Klik!", "Klik!", "Atas", "Kiri", "Bawah", "Kanan", "Klik!", "Klik!", "Klik!", "Klik!", "Di sini!", "Di sini!", "Di sini!", "Klik!", "Kita", "Main", "Klik!", "Di sini!", "Puisi", "Klik!", "Digital", "Klik!", "Ingin", "Klik!", "Terus", "Klik!", "Main", "Klik!", "Denganmu"];
+        const colors = ["#FFC0CB", "#ADD8E6", "#D2B48C"];
+        const fonts = ["Arial, sans-serif", "Georgia, serif", "Courier New, monospace", "Tahoma, sans-serif", "Verdana, sans-serif"];
+        
+        let currentIndex = 0;
+        let currentColorIndex = 0;
+        let lastFontIndex = -1;
+
+        document.getElementById("word").addEventListener("click", () => {
+
+            document.getElementById("word").textContent = words[currentIndex];
+            currentIndex = (currentIndex + 1) % words.length;
+
+            document.body.style.backgroundColor = colors[currentColorIndex];
+            currentColorIndex = (currentColorIndex + 1) % colors.length;
+
+            let randomFontIndex;
+            do {
+                randomFontIndex = Math.floor(Math.random() * fonts.length);
+            } while (randomFontIndex === lastFontIndex);
+
+            document.getElementById("word").style.fontFamily = fonts[randomFontIndex];
+            lastFontIndex = randomFontIndex;
+
+            const wordElement = document.getElementById("word");
+            const maxX = window.innerWidth - wordElement.offsetWidth;
+            const maxY = window.innerHeight - wordElement.offsetHeight;
+
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+
+            wordElement.style.left = randomX + 'px';
+            wordElement.style.top = randomY + 'px';
+        });
+    </script>
+</body>
+</html>
